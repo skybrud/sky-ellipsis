@@ -47,7 +47,7 @@
 						overflowingElements.push(word);
 					} else {
 						//otherwise - keep reference to last-word (for replacing)
-						last = word;
+						lastElement = word;
 					}
 				});
 
