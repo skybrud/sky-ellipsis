@@ -21,6 +21,8 @@
 		};
 
 		function link(scope, element) {
+			var wrapped;
+
 			// These styles must be present
 			element.css({
 				'display': 'block',
@@ -28,8 +30,11 @@
 				'position': 'relative'
 			});
 		
+			function init() {
 			// Wrap each word in a span
-			var wrapped = element[0].innerHTML.replace(/[\w,'/.]+/g, "<span>$&</span>");
+				wrapped = element[0].innerHTML.replace(/[\wæåøÆØÅ,'/.]+/g, "<span>$&</span>");
+				calculate();
+			}
 
 			function calculate() {
 				// Cache the maxHeight of the box
@@ -47,7 +52,7 @@
 						overflowingElements.push(word);
 					} else {
 						//otherwise - keep reference to last-word (for replacing)
-						last = word;
+						lastElement = word;
 					}
 				});
 
@@ -63,6 +68,9 @@
 					angular.element(lastElement).replaceWith('<span class="dotdotdot">...</span>');
 				}
 			}
+
+			setTimeout(init, 0);
+
 		};
 
 		return directive;
